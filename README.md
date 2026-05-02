@@ -169,3 +169,11 @@ Continuous monitoring and log analysis are critical for early detection and inci
 
 * index.html → Interactive scan report
 * README.md → Documentation
+
+## ✅ Conclusion
+
+This project demonstrates how misconfigured services can introduce significant security risks in a network environment.
+
+By combining technical scanning, risk analysis, and threat mapping, this assessment highlights the importance of proactive monitoring and secure configuration practices.
+
+Such analysis is essential for SOC teams to detect, prioritize, and respond to potential threats effectively.
