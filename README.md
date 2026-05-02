@@ -1,5 +1,7 @@
 # 🔐 Network Scan & Security Analysis (SOC Portfolio Project)
 
+This scenario reflects a realistic post-compromise attack chain observed in enterprise environments.
+
 ## 📌 Executive Summary
 
 This project presents a network scan and security assessment of a local subnet (192.168.1.0/24).
