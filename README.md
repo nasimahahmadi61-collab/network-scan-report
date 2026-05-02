@@ -1,19 +1,31 @@
-# network-scan-report
-
 # 🔐 Network Scan & Security Analysis (SOC Portfolio Project)
 
 ## 📌 Executive Summary
 
 This project presents a network scan and security assessment of a local subnet (192.168.1.0/24).
-The objective was to identify exposed services, detect misconfigurations, and evaluate security risks from a SOC analyst perspective.
+The objective was to identify exposed services, detect misconfigurations, and evaluate security risks from a Security Operations Center (SOC) perspective.
 
-A total of 3 hosts were identified, with 9 open ports. One system was classified as **high risk** due to insecure SMB configuration and exposed RDP access.
+A total of 3 active hosts were identified, with 9 open ports. One system was classified as **high risk** due to insecure SMB configuration and exposed RDP access.
+
+---
+
+## ❗ Why This Matters
+
+In real-world environments, misconfigured SMB services and exposed RDP are among the most common attack vectors used by adversaries.
+
+If left unmitigated, these weaknesses can allow attackers to:
+
+* Gain unauthorized access
+* Move laterally across systems
+* Compromise the entire network environment
+
+Identifying and mitigating these risks is a core responsibility of SOC analysts.
 
 ---
 
 ## 🛠 Methodology
 
-The scan was performed using Nmap:
+The scan was conducted using Nmap:
 
 ```bash
 nmap -sS -sV -sC 192.168.1.0/24
@@ -21,10 +33,10 @@ nmap -sS -sV -sC 192.168.1.0/24
 
 ### Techniques Used:
 
-* TCP SYN Scan (Stealth)
-* Service & Version Detection
-* NSE Script Scanning
-* Host Discovery
+* TCP SYN Scan (Stealth scanning)
+* Service and version detection
+* NSE script scanning
+* Host discovery
 
 ---
 
@@ -32,14 +44,14 @@ nmap -sS -sV -sC 192.168.1.0/24
 
 ### 🚨 HIGH RISK — Windows Host (192.168.1.100)
 
-* SMB (445) → message signing disabled
-* RDP (3389) → exposed
+* SMB (port 445) → message signing disabled
+* RDP (port 3389) → exposed
 
 **Risk:**
 
 * NTLM relay attacks
 * Unauthorized remote access
-* Lateral movement داخل network
+* Lateral movement within the network
 
 ---
 
@@ -50,7 +62,7 @@ nmap -sS -sV -sC 192.168.1.0/24
 **Risk:**
 
 * Brute-force attacks
-* Admin panel exposure
+* Administrative interface exposure
 
 ---
 
@@ -66,46 +78,66 @@ nmap -sS -sV -sC 192.168.1.0/24
 
 ## ⚔️ Attack Scenario
 
-An attacker who gains initial access to the network can exploit the SMB misconfiguration (disabled message signing) to perform an NTLM relay attack.
+An attacker gains initial access to the network (e.g., via phishing or compromised credentials).
+The attacker identifies a Windows host with SMB message signing disabled and performs an NTLM relay attack.
 
-Once authenticated, the attacker can:
+This allows the attacker to:
 
-1. Gain access to the Windows system
-2. Use RDP for persistence
-3. Move laterally within the network
+* Authenticate without valid credentials
+* Access system resources
+
+The attacker then uses RDP to:
+
+* Maintain persistence
+* Move laterally across the network
+* Potentially escalate privileges
+
+This chain of events can ultimately lead to full network compromise.
 
 ---
 
 ## 🧠 MITRE ATT&CK Mapping
 
-| Technique                | ID    | Description                    |
-| ------------------------ | ----- | ------------------------------ |
-| Adversary-in-the-Middle  | T1557 | Exploiting SMB for NTLM relay  |
-| Remote Services (RDP)    | T1021 | Using RDP for lateral movement |
-| Valid Accounts           | T1078 | Using captured credentials     |
-| Network Service Scanning | T1046 | Initial reconnaissance         |
+| Technique                | ID    | Description                             |
+| ------------------------ | ----- | --------------------------------------- |
+| Network Service Scanning | T1046 | Identifying active hosts and open ports |
+| Adversary-in-the-Middle  | T1557 | NTLM relay via SMB misconfiguration     |
+| Valid Accounts           | T1078 | Use of captured or relayed credentials  |
+| Remote Services (RDP)    | T1021 | Lateral movement via remote desktop     |
 
 ---
 
 ## 🎯 Risk Impact
 
-The environment is vulnerable to:
+The identified vulnerabilities create a high-risk attack path that may lead to:
 
-* Credential relay attacks
-* Unauthorized access
-* Internal network compromise
-
-The combination of SMB misconfiguration and exposed RDP creates a **high-risk attack path**.
+* Unauthorized system access
+* Credential compromise
+* lateral movement within the network
+* Full network compromise
 
 ---
 
 ## 🛡️ Mitigation Strategies
 
-* Enable SMB signing
+* Enable SMB message signing
 * Restrict RDP access (VPN or firewall rules)
 * Disable unnecessary services
-* Apply network segmentation
-* Implement MFA for remote access
+* Implement network segmentation
+* Enforce strong authentication (MFA)
+
+---
+
+## 👁️ SOC Perspective
+
+From a SOC analyst perspective, this activity could be detected through:
+
+* Unusual SMB authentication patterns
+* Suspicious RDP login attempts
+* Indicators of lateral movement
+* Anomalous network traffic behavior
+
+Continuous monitoring and log analysis are critical for early detection and incident response.
 
 ---
 
@@ -128,15 +160,12 @@ The combination of SMB misconfiguration and exposed RDP creates a **high-risk at
 * Service enumeration
 * Vulnerability identification
 * Risk assessment
-* Security reporting
 * Threat mapping (MITRE ATT&CK)
+* Security reporting
 
 ---
 
 ## 📁 Project Structure
-
-index.html → Interactive scan report
-README.md → Documentation
 
 * index.html → Interactive scan report
 * README.md → Documentation
