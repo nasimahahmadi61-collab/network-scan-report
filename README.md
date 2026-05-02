@@ -111,13 +111,12 @@ This chain of events can ultimately lead to full network compromise.
 
 ## 🎯 Risk Impact
 
-The identified vulnerabilities create a high-risk attack path that may lead to:
 
-* Unauthorized system access
-* Credential compromise
-* lateral movement within the network
-* Full network compromise
+The identified vulnerabilities create a critical attack path that could result in full compromise of the internal network.
 
+An attacker could gain unauthorized access, move laterally across systems, and potentially impact data confidentiality, system integrity, and service availability.
+
+This highlights the importance of secure configuration and continuous monitoring in enterprise environments.
 ---
 
 ## 🛡️ Mitigation Strategies
@@ -174,8 +173,12 @@ Continuous monitoring and log analysis are critical for early detection and inci
 
 ## ✅ Conclusion
 
+## ✅ Conclusion
+
 This project demonstrates how misconfigured services can introduce significant security risks in a network environment.
 
-By combining technical scanning, risk analysis, and threat mapping, this assessment highlights the importance of proactive monitoring and secure configuration practices.
+By combining network scanning, risk analysis, and threat mapping, this assessment reflects real-world SOC workflows.
 
-Such analysis is essential for SOC teams to detect, prioritize, and respond to potential threats effectively.
+Such analysis is essential for identifying, prioritizing, and responding to potential threats effectively.
+
+or SOC teams to detect, prioritize, and respond to potential threats effectively.
