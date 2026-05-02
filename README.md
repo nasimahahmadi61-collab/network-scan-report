@@ -4,7 +4,7 @@ This scenario reflects a realistic post-compromise attack chain observed in ente
 
 ## 📌 Executive Summary
 
-This project presents a network scan and security assessment of a local subnet (192.168.1.0/24).
+This project presents a network scan and security assessment of a local lab subnet (10.0.0.0/24).
 The objective was to identify exposed services, detect misconfigurations, and evaluate security risks from a Security Operations Center (SOC) perspective.
 
 A total of 3 active hosts were identified, with 9 open ports. One system was classified as **high risk** due to insecure SMB configuration and exposed RDP access.
@@ -27,10 +27,10 @@ Identifying and mitigating these risks is a core responsibility of SOC analysts.
 
 ## 🛠 Methodology
 
-The scan was conducted using Nmap:
+The scan was conducted using Nmap against a controlled home lab environment (VirtualBox — Host-only Network):
 
 ```bash
-nmap -sS -sV -sC 192.168.1.0/24
+nmap -sS -sV -sC 10.0.0.0/24
 ```
 
 ### Techniques Used:
@@ -39,12 +39,13 @@ nmap -sS -sV -sC 192.168.1.0/24
 * Service and version detection
 * NSE script scanning
 * Host discovery
+* Traffic analysis with Wireshark
 
 ---
 
 ## 🔍 Key Findings
 
-### 🚨 HIGH RISK — Windows Host (192.168.1.100)
+### 🚨 HIGH RISK — Windows Host (10.0.0.100)
 
 * SMB (port 445) → message signing disabled
 * RDP (port 3389) → exposed
@@ -57,7 +58,7 @@ nmap -sS -sV -sC 192.168.1.0/24
 
 ---
 
-### ⚠️ MEDIUM RISK — Router (192.168.1.1)
+### ⚠️ MEDIUM RISK — Router (10.0.0.1)
 
 * SSH (22), HTTP (80), HTTPS (443) exposed
 
@@ -68,7 +69,7 @@ nmap -sS -sV -sC 192.168.1.0/24
 
 ---
 
-### 🟢 LOW RISK — NAS (192.168.1.150)
+### 🟢 LOW RISK — NAS (10.0.0.150)
 
 * HTTPS service active
 
@@ -111,12 +112,12 @@ This chain of events can ultimately lead to full network compromise.
 
 ## 🎯 Risk Impact
 
-
 The identified vulnerabilities create a critical attack path that could result in full compromise of the internal network.
 
 An attacker could gain unauthorized access, move laterally across systems, and potentially impact data confidentiality, system integrity, and service availability.
 
 This highlights the importance of secure configuration and continuous monitoring in enterprise environments.
+
 ---
 
 ## 🛡️ Mitigation Strategies
@@ -150,8 +151,10 @@ Continuous monitoring and log analysis are critical for early detection and inci
 
 ## 🧰 Tools Used
 
-* Nmap
-* Linux environment
+* Nmap 7.94
+* Wireshark
+* Python 3
+* VirtualBox (lab environment)
 
 ---
 
@@ -168,10 +171,10 @@ Continuous monitoring and log analysis are critical for early detection and inci
 
 ## 📁 Project Structure
 
-* index.html → Interactive scan report
-* README.md → Documentation
+* `index.html` → Interactive scan report
+* `README.md` → Documentation
 
-## ✅ Conclusion
+---
 
 ## ✅ Conclusion
 
@@ -179,6 +182,12 @@ This project demonstrates how misconfigured services can introduce significant s
 
 By combining network scanning, risk analysis, and threat mapping, this assessment reflects real-world SOC workflows.
 
-Such analysis is essential for identifying, prioritizing, and responding to potential threats effectively.
+Such analysis is essential for SOC teams to detect, prioritize, and respond to potential threats effectively.
 
-or SOC teams to detect, prioritize, and respond to potential threats effectively.
+---
+
+## 👤 Author
+
+**Nasimah Ahmadi**  
+IT-Security Student  
+[LinkedIn](https://www.linkedin.com/in/nasimah-a-014591229) · [GitHub](https://github.com/nasimah-ahmadi)
